@@ -6,12 +6,7 @@ import java.util.Set;
 
 public class Main {
 	
-	public static void main(String[] args) {
-		String s = noRepeatingCharacters("BBBAA");
-		System.out.println(s);
-	}
-	
-	public static String noRepeatingCharacters(String s) throws IllegalArgumentException {
+	public String noRepeatingCharacters(String s) throws IllegalArgumentException {
 		char[] chars = s.toCharArray();		
 		Hashtable<Character, Integer> charFreq = new Hashtable<Character, Integer>();
 		
@@ -43,15 +38,6 @@ public class Main {
 				sb.append(ci_1.c);
 				break;
 			}
-			
-//			if (ci_2 == null) {
-//				if (sb.length() == s.length() - 1) {
-//					sb.append(ci_1.c);
-//					break;
-//				} else {
-//					throw new IllegalArgumentException();
-//				}
-//			}
 			
 			sb.append(ci_1.c);
 			sb.append(ci_2.c);
