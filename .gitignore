@@ -8,3 +8,5 @@ bin/
 .settings/
 .idea/
 *.csv
+.DS_Store
+*.class
