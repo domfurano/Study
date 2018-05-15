@@ -1,11 +1,8 @@
+package InterviewQuestions.fizzbuzz;
+
 public class FizzBuzz {
     public static void main(String[] args) {
         fizzBuzz();
-    }
-
-    public boolean foo(Set<Long> ids) {
-        val myId = getId();
-        return ids.contains(myId);
     }
 
     private static void fizzBuzz() {

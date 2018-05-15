@@ -1,0 +1,68 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+/*
+Tickets ’n Trains Template
+[{src: SEA, dest: POR},{src: POR, dest: SFO},{src: POR, dest: SLC},{src: LAX, dest: SFO},{src: SEA, dest: POR}]
+write a function that verifies whether or not you can travel from a given source city to a given destination using EXACTLY k tickets
+1) EXACTLY means EXACTLY. If you can do it in fewer or more it doesn't count
+2) When you travel a route, you lose that ticket
+3) Duplicate tickets are allowed
+
+src: SEA
+dst: SFO
+k: 2
+*/
+
+
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+        pathExists(tickets, "SEA", "SFO", 0, k);
+    }
+    
+    static boolean pathExists(List<Ticket> tickets, String src, String dest, int k, int maxK) {
+        // Base case
+        if (k > maxK) {
+            return false;
+        }
+        
+        if (src.equals(dest) && k == maxK) {
+            return true;
+        }        
+        
+        // Extract possible paths
+        List<Ticket> possiblePaths = new ArrayList<Ticket>();
+        for (Ticket ticket : tickets) {
+            if (ticket.src.equals(src)) {
+                possiblePaths.add(ticket);
+            }
+        }
+        
+        if (possiblePath.size() < 1) {
+            return false;
+        }
+        
+        boolean pathExists = false;
+        // Recursive steps
+        for (Ticket ticket : possiblePaths) {
+            tickets.remove(ticket);
+            k = k + 1;
+            pathExists = pathExists(tickets, ticket.dest, dest, k, maxK);
+            if (pathExists) {
+                return true;
+            } else {
+                tickets.add(ticket);
+            }
+        }
+        
+        return false;
+    }
+}
+
+
+
+
+
