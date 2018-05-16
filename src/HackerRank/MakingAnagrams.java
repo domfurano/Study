@@ -1,55 +1,58 @@
 package HackerRank;
 
-import java.util.LinkedList;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class MakingAnagrams {
     public static void main(String[] args) {
         MakingAnagrams makingAnagrams = new MakingAnagrams();
-        System.out.println(makingAnagrams.makeAnagrams("cde", "abc"));
+        if (makingAnagrams.makeAnagrams("cde", "abc") != 4) throw new AssertionError();
+        if (makingAnagrams.makeAnagrams("c", "c") != 0) throw new AssertionError();
+        if (makingAnagrams.makeAnagrams("", "") != 0) throw new AssertionError();
+        if (makingAnagrams.makeAnagrams("abc", "bce") != 2) throw new AssertionError();
+        if (makingAnagrams.makeAnagrams("ifjerky", "poopje") != 9) throw new AssertionError();
+        if (makingAnagrams.makeAnagrams("fcrxzwscanmligyxyvym", "jxwtrhvujlmrpdoqbisbwhmgpmeoke") != 30)
+            throw new AssertionError();
     }
 
     private int makeAnagrams(String a, String b) {
         int deletions = 0;
 
-        LinkedList<Character> aList = new LinkedList<>();
-        LinkedList<Character> bList = new LinkedList<>();
-
+        HashMap<Character, Integer> characterCounts = new HashMap<>();
         for (char c : a.toCharArray()) {
-            aList.add(c);
+            if (!characterCounts.containsKey(c)) {
+                characterCounts.put(c, 1);
+            } else {
+                characterCounts.put(c, characterCounts.get(c) + 1);
+            }
         }
-
         for (char c : b.toCharArray()) {
-            bList.add(c);
-        }
-
-        aList.sort(Character::compareTo);
-        bList.sort(Character::compareTo);
-
-        int aIndex = 0;
-        int bIndex = 0;
-
-        while (aIndex != aList.size() - 1 || bIndex != bList.size() - 1) {
-            Character _a = aList.get(aIndex);
-            Character _b = bList.get(bIndex);
-
-            if (_a.compareTo(_b) == 0) {
-                if (aIndex < aList.size() - 1) {
-                    aIndex++;
-                }
-                if (bIndex < bList.size() - 1) {
-                    bIndex++;
-                }
-            } else if (_a.compareTo(_b) < 0) {
-//                aList.remove(aIndex);
-                aIndex++;
-                deletions++;
-            } else if (_a.compareTo(_b) > 0) {
-//                bList.remove(bIndex);
-                bIndex++;
-                deletions++;
+            if (!characterCounts.containsKey(c)) {
+                characterCounts.put(c, -1);
+            } else {
+                characterCounts.put(c, characterCounts.get(c) - 1);
             }
         }
 
+        for (int i : characterCounts.values()) {
+            deletions += Math.abs(i);
+        }
+
+        return deletions;
+    }
+
+    private int deletions(String a, String b) {
+        int[] ints = new int[26];
+        int deletions = 0;
+        for (int i = 0; i < a.length(); ++i) {
+            ints[a.charAt(i) - 'a']++;
+        }
+        for (int i = 0; i < b.length(); ++i) {
+            ints[b.charAt(i) - 'a']--;
+        }
+        for (int i : ints) {
+            deletions += Math.abs(i);
+        }
         return deletions;
     }
 }
