@@ -1,7 +1,6 @@
-package HackerRank;
+package HackerRank.CrackingTheCodingInterview;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class MakingAnagrams {
     public static void main(String[] args) {

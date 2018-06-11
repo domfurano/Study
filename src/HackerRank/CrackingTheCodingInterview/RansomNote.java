@@ -1,4 +1,4 @@
-package HackerRank;
+package HackerRank.CrackingTheCodingInterview;
 
 import java.util.HashMap;
 
